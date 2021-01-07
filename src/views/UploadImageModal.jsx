@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Button } from '../components/Button';
+import Button from '../components/Button';
+import { actionSetModalOpen } from '../store/actions/app';
 
 // TODO: create and design a Header component
 
@@ -15,7 +18,7 @@ const ModalContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`
+`;
 
 const ModalContent = styled.div`
     display: flex;
@@ -28,12 +31,12 @@ const ModalContent = styled.div`
     width: 620px;
     height: 400px;
     padding: 20px 40px 20px 40px;
-`
+`;
 
 const ModalTitle = styled.p`
     font-size: 30px;
     color: #333;
-`
+`;
 
 const InputGroup = styled.div`
     width: 100%;
@@ -43,12 +46,11 @@ const InputGroup = styled.div`
     justify-content: start;
     align-items: start;
     margin-bottom:30px;
-    
-`
+`;
 
 const InputLabel = styled.div`
     margin-bottom: 10px;
-`
+`;
 
 const Input = styled.input`
     height: 50px;
@@ -58,8 +60,7 @@ const Input = styled.input`
     box-shadow: 4px 5px 5px lightgray;
     padding: 10px;
     border: 1px lightgray solid;
-`
-
+`;
 
 const ButtonsGroup = styled.div`
     width: 100%;
@@ -67,37 +68,34 @@ const ButtonsGroup = styled.div`
     flex-direction: row;
     justify-content: flex-end;
     align-items: end;
-`
+`;
 
-
-
-function AddImageModal() {
+function UploadImageModal(props) {
   return (
     <ModalContainer>
-        <ModalContent>
-            <ModalTitle>Upload an image</ModalTitle>
-            <InputGroup>
-                <InputLabel>Image</InputLabel>
-                <Input />
-            </InputGroup>
-            <InputGroup>
-                <InputLabel>Image</InputLabel>
-                <Input />
-            </InputGroup>
-            <ButtonsGroup>          
-                <Button cancel>Cancel</Button>
-                <Button primary>Upload</Button>
-            </ButtonsGroup>
-        </ModalContent>
+      <ModalContent>
+        <ModalTitle>Upload an image</ModalTitle>
+        <InputGroup>
+          <InputLabel>Image</InputLabel>
+          <Input />
+        </InputGroup>
+        <InputGroup>
+          <InputLabel>Image</InputLabel>
+          <Input />
+        </InputGroup>
+        <ButtonsGroup>
+          <Button cancel onClick={() => props.dispatch(actionSetModalOpen(false))}>Cancel</Button>
+          <Button primary>Upload</Button>
+        </ButtonsGroup>
+      </ModalContent>
     </ModalContainer>
   );
 }
 
+function mapStateToProps({ images }) {
+  return {
+    images,
+  };
+}
 
-function mapStateToProps({ images }) {  
-    return {
-      images
-    };
-  }
-  
-  export default connect(mapStateToProps)(AddImageModal);
+export default connect(mapStateToProps)(UploadImageModal);

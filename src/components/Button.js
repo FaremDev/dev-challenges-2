@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
-
-export const Button = styled.div`
+export default styled.div`
     width: 160px;
     height: 65px;
     font-weight: bold;
@@ -10,7 +9,7 @@ export const Button = styled.div`
     justify-content: center;
     font-size: 17px;
     
-    ${props => props.primary && css`
+    ${(props) => props.primary && css`
       background-color: #3DB46D;
       border-radius: 13px;
       box-shadow: 4px 5px 5px lightgray;
@@ -18,7 +17,7 @@ export const Button = styled.div`
       cursor: pointer;
     `}
 
-    ${props => props.cancel && css`
+    ${(props) => props.cancel && css`
       background-color: none;
       box-shadow: none;
       color: gray;
@@ -29,4 +28,4 @@ export const Button = styled.div`
       font-size: 17px;
       cursor: default;
     `}
-`
+`;
