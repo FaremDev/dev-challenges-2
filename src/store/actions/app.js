@@ -1,9 +1,18 @@
-export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
+export const SET_UPLOAD_MODAL_OPEN = 'SET_UPLOAD_MODAL_OPEN';
+export const SET_DELETE_MODAL_OPEN = 'SET_DELETE_MODAL_OPEN';
 
-export function actionSetModalOpen(isModalOpen) {
-  console.log(isModalOpen);
+export function actionSetUploadModalOpen(isUploadModalOpen) {
+  console.log(isUploadModalOpen);
   return {
-    type: SET_MODAL_OPEN,
-    isModalOpen,
+    type: SET_UPLOAD_MODAL_OPEN,
+    isUploadModalOpen,
+  };
+}
+
+export function actionSetDeleteModalOpen(isDeleteModalOpen) {
+  console.log(isDeleteModalOpen);
+  return {
+    type: SET_DELETE_MODAL_OPEN,
+    isDeleteModalOpen,
   };
 }

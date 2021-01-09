@@ -1,11 +1,16 @@
-import { SET_MODAL_OPEN } from '../actions/app';
+import { SET_UPLOAD_MODAL_OPEN, SET_DELETE_MODAL_OPEN } from '../actions/app';
 
 export default function app(state = { }, action) {
   switch (action.type) {
-    case SET_MODAL_OPEN:
+    case SET_UPLOAD_MODAL_OPEN:
       return {
         ...state,
-        isModalOpen: action.isModalOpen,
+        isUploadModalOpen: action.isUploadModalOpen,
+      };
+    case SET_DELETE_MODAL_OPEN:
+      return {
+        ...state,
+        isDeleteModalOpen: action.isDeleteModalOpen,
       };
     default:
       return state;
