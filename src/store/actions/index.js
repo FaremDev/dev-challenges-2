@@ -1,11 +1,22 @@
 /* eslint-disable import/prefer-default-export */
-import { actionLoadImages } from './images';
+import { actionLoadImages, setUploadState, addImageToList } from './images';
+import { getImages } from '../../utils/_api';
 
 export function loadImages() {
   return (dispatch) => {
-    // Load images, with a filter if it is set
-    const images = '';
+    // TODO: Load images, with a filter if it is set
+    dispatch(actionLoadImages(getImages()));
+  };
+}
 
-    dispatch(actionLoadImages(images));
+export function addAnImage(img) {
+  return (dispatch) => {
+    dispatch(addImageToList(img));
+  };
+}
+
+export function resetUploadState() {
+  return (dispatch) => {
+    dispatch(setUploadState('NONE'));
   };
 }

@@ -8,9 +8,13 @@ import { actionSetDeleteModalOpen } from '../store/actions/app';
 const Container = styled.div`
   border-radius: 20px;
   position: relative;
+  max-width: 400px;
+  max-height: 600px;
 `;
 
 const Image = styled.img`
+  max-width: 400px;
+  max-height: 600px;
   border-radius: 20px;
   position: relative;
   opacity: 1;
