@@ -7,7 +7,6 @@
  */
 
 export function getImage() {
-  // const rdm = Math.floor(Math.random() * (3 - 1) + 1);
   const height = Math.floor(Math.random() * (1000 - 200) + 200);
   const width = Math.floor(Math.random() * (1000 - 200) + 200);
 

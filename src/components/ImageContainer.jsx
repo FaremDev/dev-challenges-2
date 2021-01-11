@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from './Button';
 import { actionSetDeleteModalOpen } from '../store/actions/app';
+import { actionSetCurrentImageUrl } from '../store/actions/images';
 
 const Container = styled.div`
   border-radius: 20px;
@@ -82,12 +83,17 @@ function ImageContainer(props) {
   const { src } = props;
   // const [mouseEntered, setMouseEntered] = useState(false);
 
+  const openDeleteModal = () => {
+    props.dispatch(actionSetCurrentImageUrl(src));
+    props.dispatch(actionSetDeleteModalOpen(true));
+  };
+
   return (
     <Container>
       <Image src={src} alt="working" />
       <ImageOverlay>
         <DeleteButton
-          onClick={() => props.dispatch(actionSetDeleteModalOpen(true))}
+          onClick={() => openDeleteModal()}
         >
           ×
         </DeleteButton>

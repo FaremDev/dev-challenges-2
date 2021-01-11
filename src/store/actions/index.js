@@ -1,5 +1,9 @@
 /* eslint-disable import/prefer-default-export */
-import { actionLoadImages, setUploadState, addImageToList } from './images';
+import {
+  actionLoadImages,
+  setUploadState,
+  addImageToList,
+} from './images';
 import { getImages } from '../../utils/_api';
 
 export function loadImages() {
@@ -20,3 +24,13 @@ export function resetUploadState() {
     dispatch(setUploadState('NONE'));
   };
 }
+
+/* export function actionChangeModalDeleteState(modalState, currentImageUrl = '') {
+  return (dispatch) => {
+    dispatch(actionSetCurrentImageUrl(currentImageUrl));
+    if (currentImageUrl !== '') {
+      dispatch(actionRemoveImage(currentImageUrl));
+    }
+    dispatch(actionSetDeleteModalOpen(modalState));
+  };
+} */
