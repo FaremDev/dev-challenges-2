@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 // import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Button, { ButtonsGroup } from '../components/Button';
@@ -10,15 +10,27 @@ import { addImageToList } from '../store/actions/images';
 import { getImage } from '../utils/_api';
 
 function UploadImageModal(props) {
+  const [label, setLabel] = useState('');
+  const [url, setURL] = useState('');
+
   const uploadImage = () => {
-    props.dispatch(addImageToList(getImage()));
+    props.dispatch(addImageToList({ label, url }));
     props.dispatch(actionSetUploadModalOpen(false));
   };
 
+  function handleLabelChange(newLabel) {
+    setLabel(newLabel);
+  }
+
+  function handleURLChange(newURL) {
+    // TODO : Implement a check to ensure newURL is a link and directs to an image
+    setURL(newURL);
+  }
+
   return (
     <Modal title="Add an image">
-      <Input label="Image" type="text" />
-      <Input label="Image" type="text" />
+      <Input label="Label" type="text" onValueChange={handleLabelChange} value={label} />
+      <Input label="URL" type="text" onValueChange={handleURLChange} value={url} />
       <ButtonsGroup>
         <Button
           cancel

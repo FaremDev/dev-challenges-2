@@ -28,12 +28,21 @@ export const TextInput = styled.input`
 `;
 
 function Input(props) {
-  const { label, type } = props;
+  const {
+    label,
+    type,
+    value,
+    onValueChange,
+  } = props;
+
+  function changeValue(e) {
+    onValueChange(e.target.value);
+  }
 
   return (
     <InputContainer>
       <Label>{label}</Label>
-      <TextInput type={type} />
+      <TextInput type={type} onChange={changeValue} value={value} />
     </InputContainer>
   );
 }

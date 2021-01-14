@@ -1,6 +1,11 @@
+/* eslint-disable max-len */
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable prefer-const */
+import axios from 'axios';
+
 // const PORTRAIT_IMAGE = 'https://picsum.photos/400/600';
 // const LANDSCAPE_IMAGE = 'https://picsum.photos/400/300';
+const IMAGES_LIST = 'https://picsum.photos/v2/list?page=';
 
 /**
  * Mock API images loading
@@ -18,7 +23,7 @@ export function getImage() {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function getImages() {
+/* export function getImages() {
   const nbImages = Math.floor(Math.random() * 30) + 10;
   let imagesArray = [];
 
@@ -27,4 +32,13 @@ export function getImages() {
   }
 
   return imagesArray;
-}
+} */
+
+export const getImages = async () => {
+  const page = IMAGES_LIST + Math.floor(Math.random() * (33 - 1) + 1);
+  let imagesArray = [];
+
+  const response = await axios.get(page);
+
+  return response.data.forEach((image) => imagesArray.push({ url: image.download_url, label: image.author }));
+};

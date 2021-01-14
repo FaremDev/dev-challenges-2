@@ -17,13 +17,14 @@ function MasonryLayout(props) {
   return (
     <MasonryDiv columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
       <Masonry gutter="20px">
-        { images.map((img) => (<ImageContainer src={img.url} alt={img.label} key={img.url} />))}
+        { images.map((img) => (<ImageContainer src={img.url} label={img.label} key={img.url} />))}
       </Masonry>
     </MasonryDiv>
   );
 }
 
 function mapStateToProps({ images }) {
+  console.log(images.images);
   return {
     images: images.images,
   };

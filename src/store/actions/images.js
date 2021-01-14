@@ -6,7 +6,7 @@ export const SET_ERROR_FORMAT = 'SET_ERROR_FORMAT';
 export const REMOVE_IMAGE_FROM_LIST = 'REMOVE_IMAGE_FROM_LIST';
 export const SET_CURRENT_IMAGE_URL = 'SET_CURRENT_IMAGE_URL';
 
-export function actionLoadImages(images) {
+export function actionSetImages(images) {
   return {
     type: SET_IMAGES,
     images,

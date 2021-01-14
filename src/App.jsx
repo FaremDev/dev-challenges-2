@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
@@ -8,12 +9,12 @@ import DeleteImageModal from './views/DeleteImageModal';
 
 function App(props) {
   // eslint-disable-next-line react/prop-types
-  const { isUploadModalOpen, isDeleteModalOpen } = props;
+  const { isUploadModalOpen, isDeleteModalOpen, images } = props;
   return (
     <div className="App">
       <div>
         <Header />
-        <MasonryLayout />
+        { Array.isArray(images.images) && <MasonryLayout />}
         {isUploadModalOpen && (<UploadImageModal />)}
         {isDeleteModalOpen && (<DeleteImageModal />)}
       </div>

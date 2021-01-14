@@ -1,15 +1,26 @@
 /* eslint-disable import/prefer-default-export */
+import axios from 'axios';
 import {
-  actionLoadImages,
+  actionSetImages,
   setUploadState,
   addImageToList,
 } from './images';
-import { getImages } from '../../utils/_api';
+// import { getImages } from '../../utils/_api';
 
 export function loadImages() {
-  return (dispatch) => {
+  return async (dispatch) => {
     // TODO: Load images, with a filter if it is set
-    dispatch(actionLoadImages(getImages()));
+    const page = `https://picsum.photos/v2/list?page=${Math.floor(Math.random() * (33 - 1) + 1)}`;
+
+    axios.get(page)
+      // eslint-disable-next-line max-len
+      .then((response) => {
+        const imagesArray = [];
+        // eslint-disable-next-line max-len
+        response.data.forEach((image) => imagesArray.push({ url: image.download_url, label: image.author }));
+        // eslint-disable-next-line max-len
+        dispatch(actionSetImages(imagesArray));
+      });
   };
 }
 

@@ -80,7 +80,7 @@ const ImageLabel = styled.div`
 
 function ImageContainer(props) {
   // eslint-disable-next-line react/prop-types
-  const { src } = props;
+  const { src, label } = props;
   // const [mouseEntered, setMouseEntered] = useState(false);
 
   const openDeleteModal = () => {
@@ -90,14 +90,14 @@ function ImageContainer(props) {
 
   return (
     <Container>
-      <Image src={src} alt="working" />
+      <Image src={src} alt={label} />
       <ImageOverlay>
         <DeleteButton
           onClick={() => openDeleteModal()}
         >
           ×
         </DeleteButton>
-        <ImageLabel>This is a label for an image</ImageLabel>
+        <ImageLabel>{label}</ImageLabel>
       </ImageOverlay>
     </Container>
   );
