@@ -20,6 +20,11 @@ export function loadImages() {
         response.data.forEach((image) => imagesArray.push({ url: image.download_url, label: image.author }));
         // eslint-disable-next-line max-len
         dispatch(actionSetImages(imagesArray));
+      })
+      .catch((e) => {
+        console.log('Erreur requête');
+        console.log(e);
+        dispatch(actionSetImages([]));
       });
   };
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -35,14 +35,23 @@ function Input(props) {
     onValueChange,
   } = props;
 
+  const imgRef = useRef({});
+
   function changeValue(e) {
+    // console.log(e.target);
     onValueChange(e.target.value);
+  }
+
+  function changeFileValue() {
+    onValueChange(imgRef.current.files[0]);
   }
 
   return (
     <InputContainer>
       <Label>{label}</Label>
-      <TextInput type={type} onChange={changeValue} value={value} />
+      { type !== 'file'
+        ? <TextInput type={type} onChange={changeValue} value={value} />
+        : <TextInput type={type} onChange={changeFileValue} ref={imgRef} /> }
     </InputContainer>
   );
 }
