@@ -5,7 +5,8 @@ import Button, { ButtonsGroup } from '../components/Button';
 import Modal from '../components/Modal';
 import Input from '../components/Input';
 import { actionSetDeleteModalOpen } from '../store/actions/app';
-import { actionRemoveImage, actionSetCurrentImageUrl } from '../store/actions/images';
+import { actionSetCurrentImageUrl } from '../store/actions/images';
+import { actionDeleteImage } from '../store/actions';
 
 function DeleteImageModal(props) {
   const { url } = props;
@@ -16,7 +17,7 @@ function DeleteImageModal(props) {
   };
 
   const deleteImage = () => {
-    props.dispatch(actionRemoveImage(url));
+    props.dispatch(actionDeleteImage(url));
     closeModal();
   };
 

@@ -6,7 +6,8 @@ import Button, { ButtonsGroup } from '../components/Button';
 import Modal from '../components/Modal';
 import Input from '../components/Input';
 // import { actionSetUploadModalOpen } from '../store/actions/app';
-import { actionUploadImage, actionSetUploadModalOpen } from '../store/actions/app';
+import { actionSetUploadModalOpen } from '../store/actions/app';
+import { uploadImage } from '../utils/_api';
 // import { addImageToList } from '../store/actions/images';
 // import firebase from '../firebase/firebase';
 
@@ -15,10 +16,11 @@ function UploadImageModal(props) {
   const [img, setImg] = useState('');
   // const [url, setURL] = useState('');
 
-  const uploadImage = () => {
+  const onClickOnUpload = () => {
     // props.dispatch(addImageToList({ label, url }));
     console.log(img);
-    actionUploadImage(img, label);
+    uploadImage(img, label);
+    props.dispatch(actionSetUploadModalOpen(false));
   };
 
   function handleLabelChange(newLabel) {
@@ -48,7 +50,7 @@ function UploadImageModal(props) {
         >
           Cancel
         </Button>
-        <Button primary onClick={() => uploadImage()}>Upload</Button>
+        <Button primary onClick={() => onClickOnUpload()}>Upload</Button>
       </ButtonsGroup>
     </Modal>
   );
@@ -60,10 +62,4 @@ function mapStateToProps({ images }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actionUploadImage: (img, label) => dispatch(actionUploadImage(img, label)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UploadImageModal);
+export default connect(mapStateToProps)(UploadImageModal);

@@ -4,7 +4,9 @@ import {
   actionSetImages,
   setUploadState,
   addImageToList,
+  actionRemoveImage,
 } from './images';
+import { deleteImageFromFirebase } from '../../utils/_api';
 // import { getImages } from '../../utils/_api';
 
 export function loadImages() {
@@ -38,6 +40,13 @@ export function addAnImage(img) {
 export function resetUploadState() {
   return (dispatch) => {
     dispatch(setUploadState('NONE'));
+  };
+}
+
+export function actionDeleteImage(url) {
+  deleteImageFromFirebase(url);
+  return (dispatch) => {
+    dispatch(actionRemoveImage(url));
   };
 }
 
