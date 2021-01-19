@@ -10,7 +10,6 @@ import { addImageToList } from '../store/actions/images';
 // for "completed" (loading bar mechanism).
 export function uploadImage(image, label) {
   const fileName = randomFilename();
-  // const DB_URL = 'https://devchallenges2-default-rtdb.europe-west1.firebasedatabase.app/images/';
   const task = imageRef.child(fileName).put(image);
 
   task.on(
@@ -19,7 +18,12 @@ export function uploadImage(image, label) {
     null,
     async () => {
       task.snapshot.ref.getDownloadURL().then((url) => {
-        const img = { url, label, key: fileName };
+        const img = {
+          url,
+          label,
+          key: fileName,
+          creation_date: new Date().getTime(),
+        };
         database.ref(`images/${fileName}`).set(img);
         store.dispatch(addImageToList(img));
       });

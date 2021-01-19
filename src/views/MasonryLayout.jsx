@@ -4,12 +4,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import _ from 'lodash';
 import ImageContainer from '../components/ImageContainer';
 
 const MasonryDiv = styled(ResponsiveMasonry)`
   max-width: 1300px;
   margin: auto;
-  margin-top: 130px;
+  margin: 130px 50px;
 `;
 
 function MasonryLayout(props) {
@@ -26,7 +27,7 @@ function MasonryLayout(props) {
 
 function mapStateToProps({ images }) {
   return {
-    images: images.images,
+    images: _.orderBy(images.images, 'creation_date', 'desc'),
   };
 }
 
