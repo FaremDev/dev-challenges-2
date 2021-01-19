@@ -28,6 +28,7 @@ export default function images(state = { uploadingState: 'NONE', images: {} }, a
             label: action.image.label,
             url: action.image.url,
             creation_date: action.image.creation_date,
+            key: action.image.key,
           },
           ...state.images,
         },

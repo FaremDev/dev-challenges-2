@@ -16,10 +16,11 @@ function DeleteImageModal(props) {
     props.dispatch(setCurrentImageKey(''));
   };
 
-  const handleDeleteImage = () => {
+  function handleDeleteImage() {
+    // TODO : check that the password is correct
     props.dispatch(deleteImage(id));
     closeModal();
-  };
+  }
 
   return (
     <Modal title="Are you sure?">

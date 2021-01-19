@@ -19,7 +19,7 @@ function MasonryLayout(props) {
   return (
     <MasonryDiv columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
       <Masonry gutter="20px">
-        { Object.keys(images).map((key) => (<ImageContainer src={images[key].url} id={key} label={images[key].label} key={key} />))}
+        { Object.keys(images).map((key) => (<ImageContainer src={images[key].url} id={images[key].key} label={images[key].label} key={key} />))}
       </Masonry>
     </MasonryDiv>
   );

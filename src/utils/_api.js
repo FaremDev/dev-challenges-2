@@ -32,15 +32,14 @@ export function uploadImage(image, label) {
 }
 
 export function deleteImageFromFirebase(key) {
-  // const startPos = url.search('images%2F') + 9;
-  // const endPos = url.search('\\?alt=media') !== -1 ? url.search('\\?alt=media') : url.length - 1;
-  // const objectName = url.substring(startPos, endPos);
   const imgToDeleteRef = imageRef.child(`${key}`);
 
+  // First, delete the image from Firebase Storage
   imgToDeleteRef.delete()
     .then(() => {
       console.log('Firebase Storage : image deleted');
-      // TODO Remove image infos from Firebase Realtime Database
+
+      // If deletion successful, deletes the image infos from Realtime Database
       database.ref(`images/${key}`).remove()
         .then(() => {
           console.log('Firebase Realtime Database : image deleted');
