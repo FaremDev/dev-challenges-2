@@ -33,14 +33,14 @@ export function setErrorFormat(isErrorFormat) {
   };
 }
 
-export function actionRemoveImage(key) {
+export function removeImage(key) {
   return {
     type: REMOVE_IMAGE_FROM_LIST,
     key,
   };
 }
 
-export function actionSetCurrentImageKey(currentImageKey) {
+export function setCurrentImageKey(currentImageKey) {
   return {
     type: SET_CURRENT_IMAGE_KEY,
     currentImageKey,

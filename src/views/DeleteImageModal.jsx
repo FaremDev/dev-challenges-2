@@ -4,20 +4,20 @@ import { connect } from 'react-redux';
 import Button, { ButtonsGroup } from '../components/Button';
 import Modal from '../components/Modal';
 import Input from '../components/Input';
-import { actionSetDeleteModalOpen } from '../store/actions/app';
-import { actionSetCurrentImageKey } from '../store/actions/images';
-import { actionDeleteImage } from '../store/actions';
+import { setDeleteModalOpen } from '../store/actions/app';
+import { setCurrentImageKey } from '../store/actions/images';
+import { deleteImage } from '../store/actions';
 
 function DeleteImageModal(props) {
   const { id } = props;
 
   const closeModal = () => {
-    props.dispatch(actionSetDeleteModalOpen(false));
-    props.dispatch(actionSetCurrentImageKey(''));
+    props.dispatch(setDeleteModalOpen(false));
+    props.dispatch(setCurrentImageKey(''));
   };
 
-  const deleteImage = () => {
-    props.dispatch(actionDeleteImage(id));
+  const handleDeleteImage = () => {
+    props.dispatch(deleteImage(id));
     closeModal();
   };
 
@@ -27,13 +27,13 @@ function DeleteImageModal(props) {
       <ButtonsGroup>
         <Button
           cancel
-          onClick={() => props.dispatch(actionSetDeleteModalOpen(false))}
+          onClick={() => props.dispatch(setDeleteModalOpen(false))}
         >
           Cancel
         </Button>
         <Button
           delete
-          onClick={() => deleteImage()}
+          onClick={() => handleDeleteImage()}
         >
           Delete
         </Button>

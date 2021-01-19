@@ -1,37 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable prefer-const */
-import axios from 'axios';
 import { imageRef, database } from '../firebase/firebase';
 import store from '../store';
 import { randomFilename } from './index';
 import { addImageToList } from '../store/actions/images';
-
-const IMAGES_LIST = 'https://picsum.photos/v2/list?page=';
-
-/**
- * Mock API images loading
- */
-
-export function getImage() {
-  const height = Math.floor(Math.random() * (1000 - 200) + 200);
-  const width = Math.floor(Math.random() * (1000 - 200) + 200);
-
-  const url = `https://picsum.photos/${width}/${height}`;
-  return {
-    label: 'working image',
-    url,
-  };
-}
-
-export const getImages = async () => {
-  const page = IMAGES_LIST + Math.floor(Math.random() * (33 - 1) + 1);
-  let imagesArray = [];
-
-  const response = await axios.get(page);
-
-  return response.data.forEach((image) => imagesArray.push({ url: image.download_url, label: image.author }));
-};
 
 // TODO : Integrate callbacks for "completing" and "failed", on top of the one
 // for "completed" (loading bar mechanism).
@@ -52,10 +25,6 @@ export function uploadImage(image, label) {
       });
     },
   );
-}
-
-export function getImagesFromFirebase() {
-  console.log(database.ref('images/'));
 }
 
 export function deleteImageFromFirebase(key) {

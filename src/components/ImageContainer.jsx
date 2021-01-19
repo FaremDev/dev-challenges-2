@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from './Button';
-import { actionSetDeleteModalOpen } from '../store/actions/app';
-import { actionSetCurrentImageKey } from '../store/actions/images';
+import { setDeleteModalOpen } from '../store/actions/app';
+import { setCurrentImageKey } from '../store/actions/images';
 
 const Container = styled.div`
   border-radius: 20px;
@@ -83,8 +83,8 @@ function ImageContainer(props) {
   const { src, label, id } = props;
 
   const openDeleteModal = () => {
-    props.dispatch(actionSetCurrentImageKey(id));
-    props.dispatch(actionSetDeleteModalOpen(true));
+    props.dispatch(setCurrentImageKey(id));
+    props.dispatch(setDeleteModalOpen(true));
   };
 
   return (

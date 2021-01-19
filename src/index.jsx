@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './store';
-import { loadImagesFromFirebase } from './store/actions';
+import { actionLoadImagesFromFirebase } from './store/actions';
 import App from './App';
 
-store.dispatch(loadImagesFromFirebase());
+store.dispatch(actionLoadImagesFromFirebase());
 
 ReactDOM.render(
   <Provider store={store}>

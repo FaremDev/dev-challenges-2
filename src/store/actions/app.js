@@ -1,6 +1,5 @@
 export const SET_UPLOAD_MODAL_OPEN = 'SET_UPLOAD_MODAL_OPEN';
 export const SET_DELETE_MODAL_OPEN = 'SET_DELETE_MODAL_OPEN';
-export const GET_IMAGES_URLS = 'SET_DELETE_MODAL_OPEN';
 
 export function actionSetUploadModalOpen(isUploadModalOpen) {
   return {
@@ -9,7 +8,7 @@ export function actionSetUploadModalOpen(isUploadModalOpen) {
   };
 }
 
-export function actionSetDeleteModalOpen(isDeleteModalOpen) {
+export function setDeleteModalOpen(isDeleteModalOpen) {
   return {
     type: SET_DELETE_MODAL_OPEN,
     isDeleteModalOpen,
