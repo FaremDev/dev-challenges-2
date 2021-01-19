@@ -1,14 +1,14 @@
+import _ from 'lodash';
 import {
   SET_IMAGES,
   SET_UPLOAD_STATE,
   SET_ERROR_FORMAT,
   ADD_IMAGE_TO_LIST,
-  ADD_IMAGES_TO_LIST,
   REMOVE_IMAGE_FROM_LIST,
-  SET_CURRENT_IMAGE_URL,
+  SET_CURRENT_IMAGE_KEY,
 } from '../actions/images';
 
-export default function images(state = { uploadingState: 'NONE' }, action) {
+export default function images(state = { uploadingState: 'NONE', images: {} }, action) {
   switch (action.type) {
     case SET_IMAGES:
       return {
@@ -23,27 +23,30 @@ export default function images(state = { uploadingState: 'NONE' }, action) {
     case ADD_IMAGE_TO_LIST:
       return {
         ...state,
-        images: [action.image].concat(state.images),
-      };
-    case ADD_IMAGES_TO_LIST:
-      return {
-        ...state,
-        images: state.images.concat([action.images]),
+        images: {
+          [action.image.key]: {
+            label: [action.image.label],
+            url: [action.image.url],
+          },
+          ...state.images,
+        },
       };
     case REMOVE_IMAGE_FROM_LIST:
+      // eslint-disable-next-line no-case-declarations
+      const newStateImages = _.omit(state.images, action.key);
       return {
         ...state,
-        images: state.images.filter((obj) => obj.url !== action.url),
+        images: newStateImages,
       };
     case SET_ERROR_FORMAT:
       return {
         ...state,
         isErrorFormat: action.isErrorFormat,
       };
-    case SET_CURRENT_IMAGE_URL:
+    case SET_CURRENT_IMAGE_KEY:
       return {
         ...state,
-        currentImageUrl: action.currentImageUrl,
+        currentImageKey: action.currentImageKey,
       };
     default:
       return state;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from './Button';
 import { actionSetDeleteModalOpen } from '../store/actions/app';
-import { actionSetCurrentImageUrl } from '../store/actions/images';
+import { actionSetCurrentImageKey } from '../store/actions/images';
 
 const Container = styled.div`
   border-radius: 20px;
@@ -80,11 +80,10 @@ const ImageLabel = styled.div`
 
 function ImageContainer(props) {
   // eslint-disable-next-line react/prop-types
-  const { src, label } = props;
-  // const [mouseEntered, setMouseEntered] = useState(false);
+  const { src, label, id } = props;
 
   const openDeleteModal = () => {
-    props.dispatch(actionSetCurrentImageUrl(src));
+    props.dispatch(actionSetCurrentImageKey(id));
     props.dispatch(actionSetDeleteModalOpen(true));
   };
 

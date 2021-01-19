@@ -6,10 +6,27 @@ import {
   addImageToList,
   actionRemoveImage,
 } from './images';
+import { database } from '../../firebase/firebase';
 import { deleteImageFromFirebase } from '../../utils/_api';
-// import { getImages } from '../../utils/_api';
 
-export function loadImages() {
+async function getImages() {
+  return database.ref('images/').once('value');
+}
+
+export function loadImagesFromFirebase() {
+  return async (dispatch) => {
+    await getImages()
+      .then((snapshot) => {
+        snapshot.val();
+        dispatch(actionSetImages(snapshot.val()));
+        return snapshot.val();
+      }).catch((e) => {
+        console.log(e);
+      });
+  };
+}
+
+export function loadImagesFromPicsum() {
   return async (dispatch) => {
     // TODO: Load images, with a filter if it is set
     const page = `https://picsum.photos/v2/list?page=${Math.floor(Math.random() * (33 - 1) + 1)}`;
@@ -43,19 +60,9 @@ export function resetUploadState() {
   };
 }
 
-export function actionDeleteImage(url) {
-  deleteImageFromFirebase(url);
+export function actionDeleteImage(key) {
+  deleteImageFromFirebase(key);
   return (dispatch) => {
-    dispatch(actionRemoveImage(url));
+    dispatch(actionRemoveImage(key));
   };
 }
-
-/* export function actionChangeModalDeleteState(modalState, currentImageUrl = '') {
-  return (dispatch) => {
-    dispatch(actionSetCurrentImageUrl(currentImageUrl));
-    if (currentImageUrl !== '') {
-      dispatch(actionRemoveImage(currentImageUrl));
-    }
-    dispatch(actionSetDeleteModalOpen(modalState));
-  };
-} */

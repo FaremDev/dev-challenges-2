@@ -7,8 +7,6 @@ import store from '../store';
 import { randomFilename } from './index';
 import { addImageToList } from '../store/actions/images';
 
-// const PORTRAIT_IMAGE = 'https://picsum.photos/400/600';
-// const LANDSCAPE_IMAGE = 'https://picsum.photos/400/300';
 const IMAGES_LIST = 'https://picsum.photos/v2/list?page=';
 
 /**
@@ -25,18 +23,6 @@ export function getImage() {
     url,
   };
 }
-
-// eslint-disable-next-line import/prefer-default-export
-/* export function getImages() {
-  const nbImages = Math.floor(Math.random() * 30) + 10;
-  let imagesArray = [];
-
-  for (let i = 0; i < nbImages; i += 1) {
-    imagesArray.push(getImage());
-  }
-
-  return imagesArray;
-} */
 
 export const getImages = async () => {
   const page = IMAGES_LIST + Math.floor(Math.random() * (33 - 1) + 1);
@@ -60,7 +46,7 @@ export function uploadImage(image, label) {
     null,
     async () => {
       task.snapshot.ref.getDownloadURL().then((url) => {
-        const img = { url, label };
+        const img = { url, label, key: fileName };
         database.ref(`images/${fileName}`).set(img);
         store.dispatch(addImageToList(img));
       });
@@ -72,17 +58,17 @@ export function getImagesFromFirebase() {
   console.log(database.ref('images/'));
 }
 
-export function deleteImageFromFirebase(url) {
-  const startPos = url.search('images%2F') + 9;
-  const endPos = url.search('\\?alt=media') !== -1 ? url.search('\\?alt=media') : url.length - 1;
-  const objectName = url.substring(startPos, endPos);
-  const imgToDeleteRef = imageRef.child(objectName);
+export function deleteImageFromFirebase(key) {
+  // const startPos = url.search('images%2F') + 9;
+  // const endPos = url.search('\\?alt=media') !== -1 ? url.search('\\?alt=media') : url.length - 1;
+  // const objectName = url.substring(startPos, endPos);
+  const imgToDeleteRef = imageRef.child(`${key}`);
 
   imgToDeleteRef.delete()
     .then(() => {
       console.log('Firebase Storage : image deleted');
       // TODO Remove image infos from Firebase Realtime Database
-      database.ref(`images/${objectName}`).remove()
+      database.ref(`images/${key}`).remove()
         .then(() => {
           console.log('Firebase Realtime Database : image deleted');
         })
@@ -92,6 +78,4 @@ export function deleteImageFromFirebase(url) {
     }).catch((e) => {
       console.log('Firebase Storage deletion error', e);
     });
-
-  // TODO : Then, delete image from local store
 }

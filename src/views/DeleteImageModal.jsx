@@ -5,19 +5,19 @@ import Button, { ButtonsGroup } from '../components/Button';
 import Modal from '../components/Modal';
 import Input from '../components/Input';
 import { actionSetDeleteModalOpen } from '../store/actions/app';
-import { actionSetCurrentImageUrl } from '../store/actions/images';
+import { actionSetCurrentImageKey } from '../store/actions/images';
 import { actionDeleteImage } from '../store/actions';
 
 function DeleteImageModal(props) {
-  const { url } = props;
+  const { id } = props;
 
   const closeModal = () => {
     props.dispatch(actionSetDeleteModalOpen(false));
-    props.dispatch(actionSetCurrentImageUrl(''));
+    props.dispatch(actionSetCurrentImageKey(''));
   };
 
   const deleteImage = () => {
-    props.dispatch(actionDeleteImage(url));
+    props.dispatch(actionDeleteImage(id));
     closeModal();
   };
 
@@ -45,7 +45,7 @@ function DeleteImageModal(props) {
 function mapStateToProps({ images }) {
   return {
     images,
-    url: images.currentImageUrl,
+    id: images.currentImageKey,
   };
 }
 
