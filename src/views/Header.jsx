@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Button from '../components/Button';
-import { actionSetUploadModalOpen } from '../store/actions/app';
+import { actionSetUploadModalOpen, setSearchTerm } from '../store/actions/app';
 import logo from '../logo.svg';
 
 // TODO: Add animation when showing UploadImageModal
@@ -46,12 +47,27 @@ const UploadButton = styled(Button)`
 `;
 
 function Header(props) {
+  const [inputTime, setInputTime] = useState(0);
+
+  function handleOnChangeSearchTerm(e) {
+    if (inputTime) {
+      clearTimeout(inputTime);
+    }
+
+    setInputTime(setTimeout(() => {
+      props.dispatch(setSearchTerm(e.target.value));
+    }, 300));
+  }
+
   return (
     <HeaderContainer>
       <LogoContainer>
         <img src={logo} alt="logo" />
       </LogoContainer>
-      <SearchBar placeholder="Search by name" />
+      <SearchBar
+        placeholder="Search by name"
+        onChange={(e) => handleOnChangeSearchTerm(e)}
+      />
       <UploadButton primary onClick={() => props.dispatch(actionSetUploadModalOpen(true))}>
         Add a photo
       </UploadButton>

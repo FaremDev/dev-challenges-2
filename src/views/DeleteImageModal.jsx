@@ -45,7 +45,6 @@ function DeleteImageModal(props) {
 
 function mapStateToProps({ images }) {
   return {
-    images,
     id: images.currentImageKey,
   };
 }

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import _ from 'lodash';
+import { filterObject } from '../utils';
 import ImageContainer from '../components/ImageContainer';
 
 const MasonryDiv = styled(ResponsiveMasonry)`
@@ -25,9 +26,10 @@ function MasonryLayout(props) {
   );
 }
 
-function mapStateToProps({ images }) {
+function mapStateToProps({ images, app }) {
   return {
-    images: _.orderBy(images.images, 'creation_date', 'desc'),
+    // images: _.orderBy(images.images, 'creation_date', 'desc'),
+    images: _.orderBy(filterObject(images.images, 'label', app.searchTerm), 'creation_date', 'desc'),
   };
 }
 
