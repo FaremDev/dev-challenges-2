@@ -11,7 +11,7 @@ import ImageContainer from '../components/ImageContainer';
 const MasonryDiv = styled(ResponsiveMasonry)`
   max-width: 1300px;
   margin: auto;
-  margin: 130px 50px;
+  margin: 130px auto;
 `;
 
 function MasonryLayout(props) {
@@ -19,9 +19,13 @@ function MasonryLayout(props) {
 
   return (
     <MasonryDiv columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-      <Masonry gutter="20px">
-        { Object.keys(images).map((key) => (<ImageContainer src={images[key].url} id={images[key].key} label={images[key].label} key={key} />))}
-      </Masonry>
+      { typeof images === 'object' && images !== null && Object.entries(images).length !== 0
+        ? (
+          <Masonry gutter="50px">
+            { Object.keys(images).map((key) => (<ImageContainer src={images[key].url} id={images[key].key} label={images[key].label} key={key} />))}
+          </Masonry>
+        )
+        : (<p>No images found</p>)}
     </MasonryDiv>
   );
 }

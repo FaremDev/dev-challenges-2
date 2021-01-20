@@ -5,10 +5,17 @@ import {
   addImageToList,
   removeImage,
 } from './images';
-import { database } from '../../firebase/firebase';
-import { deleteImageFromFirebase } from '../../utils/_api';
+// import { database } from '../../firebase/firebase';
+import { deleteImageFromFirebase, fetchImages } from '../../utils/_api';
 
 export function actionLoadImagesFromFirebase() {
+  return async (dispatch) => {
+    await fetchImages()
+      .then((val) => dispatch(actionSetImages(val)));
+  };
+}
+
+/* export function actionLoadImagesFromFirebase() {
   return async (dispatch) => {
     await database.ref('images/').once('value')
       .then((snapshot) => {
@@ -19,7 +26,7 @@ export function actionLoadImagesFromFirebase() {
         console.log(e);
       });
   };
-}
+} */
 
 export function addAnImage(img) {
   return (dispatch) => {

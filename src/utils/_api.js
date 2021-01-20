@@ -8,6 +8,13 @@ import { addImageToList } from '../store/actions/images';
 
 // TODO : Integrate callbacks for "completing" and "failed", on top of the one
 // for "completed" (loading bar mechanism).
+
+export async function fetchImages() {
+  return database.ref('images/').once('value')
+    .then((snapshot) => snapshot.val())
+    .catch((e) => console.log(e));
+}
+
 export function uploadImage(image, label) {
   const fileName = randomFilename();
   const task = imageRef.child(fileName).put(image);
